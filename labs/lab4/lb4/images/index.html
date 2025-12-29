@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Записная книжка-органайзер</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Органайзер</h1>
+        </header>
+        
+        <main>
+            <section class="calendar">
+                <div class="calendar-header">
+                    <button id="prev-month" class="nav-btn" aria-label="Предыдущий месяц">&lt;</button>
+                    <h2 id="current-month-year"></h2>
+                    <button id="next-month" class="nav-btn" aria-label="Следующий месяц">&gt;</button>
+                </div>
+                
+                <div class="weekdays">
+                    <span>Пн</span>
+                    <span>Вт</span>
+                    <span>Ср</span>
+                    <span>Чт</span>
+                    <span>Пт</span>
+                    <span>Сб</span>
+                    <span>Вс</span>
+                </div>
+                
+                <div id="calendar" class="calendar-grid"></div>
+            </section>
+            
+            <aside class="tasks-sidebar">
+                <h3 id="selected-date">Выберите дату</h3>
+                <ul id="todo-list" role="list">
+                    <li class="no-tasks">Планов нет</li>
+                </ul>
+                
+                <form class="task-form" id="task-form">
+                    <input type="text" id="new-task" placeholder="Введите новое дело..." required>
+                    <button type="submit" id="add-task">Добавить</button>
+                </form>
+                
+                <button id="clear-tasks" class="clear-btn">Очистить все</button>
+            </aside>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
