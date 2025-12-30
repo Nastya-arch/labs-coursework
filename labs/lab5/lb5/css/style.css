@@ -1,0 +1,302 @@
+/* Основные стили (аналогично ЛР3 с дополнениями) */
+body {
+    background-color: #f9f5f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 20px;
+}
+
+/* Основные стили (из ЛР3) */
+.coffee-bg {
+    background: linear-gradient(135deg, #8b4513 0%, #d2691e 50%, #f4a460 100%);
+    color: white;
+}
+
+.btn-coffee {
+    background-color: #8b4513;
+    color: white;
+    border-color: #8b4513;
+}
+
+.btn-coffee:hover {
+    background-color: #a0522d;
+    border-color: #a0522d;
+    color: white;
+}
+
+.text-coffee {
+    color: #8b4513 !important;
+}
+
+.badge-coffee {
+    background-color: #8b4513;
+    color: white;
+}
+
+.btn-outline-coffee {
+    background-color: transparent;
+    color: #8b4513;
+    border-color: #8b4513;
+}
+
+.btn-outline-coffee:hover {
+    background-color: #8b4513;
+    color: white;
+}
+
+/* Стиль для таблицы (из ЛР3) */
+.table th {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.table th:hover {
+    background-color: rgba(139, 69, 19, 0.2);
+}
+
+/* Стиль для aside (из ЛР3) */
+.aside-block {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.aside-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+
+/* Стиль для карточек меню (из ЛР3) */
+.card {
+    border: 1px solid #e0d6cc;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Стили для динамического меню (задание 3) */
+#dynamicMenu {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#dynamicMenu .nav-item {
+    position: relative;
+    margin-right: 10px;
+}
+
+#dynamicMenu .nav-link {
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+}
+
+#dynamicMenu .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Выпадающее меню второго уровня */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 0;
+    min-width: 200px;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: #8b4513;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #8b4513;
+    padding-left: 25px;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Стили для статей и секций (задание 2) */
+article {
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+article h2 {
+    color: #8b4513;
+    border-bottom: 2px solid #d2691e;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+section h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Стили для увеличенного aside (задание 6) */
+.aside-zoomed {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1.4) !important;
+    width: 80% !important;
+    max-width: 800px !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    z-index: 9999 !important;
+    background-color: white !important;
+    box-shadow: 0 0 40px rgba(0,0,0,0.4) !important;
+    border: 3px solid #8b4513 !important;
+    padding: 30px !important;
+    transition: all 0.5s ease !important;
+    animation: zoomIn 0.5s ease forwards;
+}
+
+.aside-zoomed * {
+    font-size: 1.15em !important;
+    line-height: 1.6 !important;
+}
+
+.aside-zoomed h4 {
+    font-size: 1.8em !important;
+    color: #8b4513 !important;
+    text-align: center;
+    margin-bottom: 25px !important;
+}
+
+/* Оверлей для увеличенного aside */
+.aside-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+    cursor: pointer;
+}
+
+/* Анимации */
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.4);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.4);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* Стили для галереи */
+.gallery-img {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(139, 69, 19, 0.3);
+}
+
+/* Адаптивность (из ЛР3) */
+@media screen and (max-width: 768px) {
+    header .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    nav {
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    #dynamicMenu {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #dynamicMenu .nav-item {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+        overflow-x: auto;
+    }
+    
+    section {
+        padding: 15px !important;
+    }
+    
+    .aside-zoomed {
+        width: 95% !important;
+        padding: 20px !important;
+    }
+}
+
+/* Стили для выделения (будут использоваться в скриптах) */
+.highlighted-section {
+    background-color: rgba(139, 69, 19, 0.1) !important;
+    border-left: 4px solid #8b4513 !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(139, 69, 19, 0.2) !important;
+}
+
+.highlighted-column {
+    box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.5) !important;
+    background-color: rgba(139, 69, 19, 0.05) !important;
+    transition: all 0.3s ease;
+}

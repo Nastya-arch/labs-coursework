@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейня "Уютный уголок" - jQuery версия (ЛР5)</title>
+    
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    
+    <!-- Собственные стили -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Стили для выделения (аналогично ЛР3) -->
+    <style>
+        /* Стили для выделения разделов (из ЛР3) */
+        .highlighted-section {
+            background-color: rgba(139, 69, 19, 0.1) !important;
+            border-left: 4px solid #8b4513 !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.2) !important;
+        }
+        
+        /* Стили для выделения столбцов таблицы (из ЛР3) */
+        .highlighted-column {
+            box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.5) !important;
+            background-color: rgba(139, 69, 19, 0.05) !important;
+            transition: all 0.3s ease;
+        }
+        
+        /* Стили для формы (из ЛР3) */
+        .red-bg {
+            background-color: #ffebee !important;
+            border-color: #f44336 !important;
+            transition: all 0.3s ease;
+        }
+        
+        .green-bg {
+            background-color: #e8f5e8 !important;
+            border-color: #4caf50 !important;
+            transition: all 0.3s ease;
+        }
+        
+        .blue-bg {
+            background-color: #e3f2fd !important;
+            border-color: #2196f3 !important;
+            transition: all 0.3s ease;
+        }
+        
+        /* Кофейная тема (из ЛР3) */
+        .coffee-bg {
+            background: linear-gradient(135deg, #8b4513 0%, #d2691e 50%, #f4a460 100%);
+            color: white;
+        }
+        
+        .btn-coffee {
+            background-color: #8b4513;
+            color: white;
+            border-color: #8b4513;
+        }
+        
+        .btn-coffee:hover {
+            background-color: #a0522d;
+            border-color: #a0522d;
+            color: white;
+        }
+        
+        .text-coffee {
+            color: #8b4513 !important;
+        }
+        
+        .badge-coffee {
+            background-color: #8b4513;
+            color: white;
+        }
+        
+        /* Анимация мигания для логотипа (задание 7) */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .blink {
+            animation: blink 0.6s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с навигацией (из ЛР3, с добавлением логотипа) -->
+    <header class="sticky-top coffee-bg p-3 shadow-sm">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <!-- Логотип для мигания (задание 7) -->
+                <div class="logo-placeholder mr-3 rounded-circle d-flex align-items-center justify-content-center"
+                     id="logo"
+                     style="width: 60px; height: 60px; background-color: white; color: #8b4513; font-weight: bold; cursor: pointer;">
+                    ☕
+                </div>
+                <h1 class="mb-0">Кофейня "Уютный уголок"</h1>
+            </div>
+            
+            <!-- Динамическое меню будет создано через jQuery -->
+            <nav>
+                <ul class="nav" id="dynamicMenu">
+                    <!-- Меню генерируется автоматически -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <!-- СТАТЬЯ 1: Меню -->
+        <article id="article-menu" class="mb-5 p-4 bg-white rounded shadow-sm">
+            <h2 class="text-coffee">☕ Наше меню</h2>
+            
+            <!-- Секция 1.1: Классические напитки -->
+            <section id="section-classic" class="mb-4 p-3 bg-light rounded">
+                <h3>Классические напитки</h3>
+                <p>Мы предлагаем традиционные кофейные напитки, приготовленные из отборных зерен арабики.</p>
+                <div class="row mt-3">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Эспрессо</h5>
+                                <p class="card-text">Классический крепкий кофе - 30 мл</p>
+                                <span class="badge badge-coffee">150 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Капучино</h5>
+                                <p class="card-text">Кофе с молочной пенкой - 200 мл</p>
+                                <span class="badge badge-coffee">250 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция 1.2: Сезонные предложения -->
+            <section id="section-seasonal" class="mb-4 p-3 bg-light rounded">
+                <h3>Сезонные предложения</h3>
+                <p>Каждый сезон мы готовим специальные напитки, вдохновленные временем года.</p>
+                <ul>
+                    <li>Осенний пряный латте</li>
+                    <li>Летний кокосовый раф</li>
+                    <li>Весенний ванильный капучино</li>
+                </ul>
+            </section>
+            
+            <!-- Aside элемент -->
+            <aside class="aside-block p-3 bg-light rounded">
+                <h4 class="text-coffee">🏆 Хит недели</h4>
+                <div class="aside-content">
+                    <p><strong>Карамельный раф</strong> - нежный кофе с карамельным сиропом и сливками</p>
+                    <p class="text-success"><strong>Всего 280 ₽</strong></p>
+                    <small class="text-muted">До конца недели действует скидка 10% на этот напиток</small>
+                </div>
+            </aside>
+        </article>
+
+        <!-- СТАТЬЯ 2: Команда -->
+        <article id="article-team" class="mb-5 p-4 bg-white rounded shadow-sm">
+            <h2 class="text-coffee">👨‍🍳 Наша команда</h2>
+            
+            <!-- Секция 2.1: Наши специалисты -->
+            <section id="section-staff" class="mb-4 p-3 bg-light rounded">
+                <h3>Наши специалисты</h3>
+                <p>В нашем кафе работают только профессиональные бариста и кондитеры с многолетним опытом.</p>
+                <div class="row mt-3">
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="p-3 border rounded">
+                            <h5>Анна</h5>
+                            <p class="mb-1">Старший бариста</p>
+                            <small class="text-muted">Опыт: 8 лет</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="p-3 border rounded">
+                            <h5>Михаил</h5>
+                            <p class="mb-1">Бариста</p>
+                            <small class="text-muted">Опыт: 5 лет</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="p-3 border rounded">
+                            <h5>Елена</h5>
+                            <p class="mb-1">Кондитер</p>
+                            <small class="text-muted">Опыт: 10 лет</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="p-3 border rounded">
+                            <h5>Денис</h5>
+                            <p class="mb-1">Бариста</p>
+                            <small class="text-muted">Опыт: 3 года</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция 2.2: График работы -->
+            <section id="section-schedule" class="p-3 bg-light rounded">
+                <h3>График работы бариста</h3>
+                <!-- Таблица из ЛР3 -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped table-bordered" id="schedule-table">
+                        <caption>Расписание на текущую неделю</caption>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th data-column="0">Имя</th>
+                                <th data-column="1">Должность</th>
+                                <th data-column="2">Понедельник</th>
+                                <th data-column="3">Вторник</th>
+                                <th data-column="4">Среда</th>
+                                <th data-column="5">Четверг</th>
+                                <th data-column="6">Пятница</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Анна</th>
+                                <td>Старший бариста</td>
+                                <td>10:00-18:00</td>
+                                <td>10:00-18:00</td>
+                                <td>Выходной</td>
+                                <td>12:00-20:00</td>
+                                <td>12:00-20:00</td>
+                            </tr>
+                            <tr>
+                                <th>Михаил</th>
+                                <td>Бариста</td>
+                                <td>12:00-20:00</td>
+                                <td>12:00-20:00</td>
+                                <td>10:00-18:00</td>
+                                <td>10:00-18:00</td>
+                                <td>Выходной</td>
+                            </tr>
+                            <tr>
+                                <th>Елена</th>
+                                <td>Кондитер</td>
+                                <td>08:00-16:00</td>
+                                <td>08:00-16:00</td>
+                                <td>08:00-16:00</td>
+                                <td>08:00-16:00</td>
+                                <td>08:00-16:00</td>
+                            </tr>
+                            <tr>
+                                <th>Денис</th>
+                                <td>Бариста</td>
+                                <td>Выходной</td>
+                                <td>14:00-22:00</td>
+                                <td>14:00-22:00</td>
+                                <td>14:00-22:00</td>
+                                <td>14:00-22:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-muted mt-2"><small>Нажмите на заголовок столбца, чтобы выделить все ячейки в этом столбце</small></p>
+            </section>
+            
+            <!-- Aside элемент -->
+            <aside class="aside-block p-3 bg-light rounded mt-4">
+                <h4 class="text-coffee">ℹ️ Интересный факт</h4>
+                <div class="aside-content">
+                    <p id="fact-text">Знаете ли вы, что наш старший бариста Анна выиграла региональный чемпионат по латте-арт в 2023 году? Она создает настоящие произведения искусства на поверхности вашего кофе!</p>
+                </div>
+            </aside>
+        </article>
+
+        <!-- СТАТЬЯ 3: Форма обратной связи -->
+        <article id="article-feedback" class="mb-5 p-4 bg-white rounded shadow-sm">
+            <h2 class="text-coffee">📝 Опрос о нашем кафе</h2>
+            
+            <!-- Секция 3.1: Описание -->
+            <section id="section-description" class="mb-4 p-3 bg-light rounded">
+                <h3>Помогите нам стать лучше!</h3>
+                <p>Заполните форму обратной связи. Мы ценим ваше мнение и используем его для улучшения нашего сервиса.</p>
+                <p>Каждый отзыв помогает нам стать лучше и создавать для вас идеальный кофейный опыт.</p>
+            </section>
+            
+            <!-- Секция 3.2: Форма -->
+            <section id="section-form" class="p-3 bg-light rounded">
+                <!-- Форма из ЛР3 -->
+                <form id="survey-form" class="mt-4" action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Ваше имя:</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Введите ваше имя" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Ваш возраст:</label>
+                        <input type="number" id="age" name="age" class="form-control" min="18" max="100" placeholder="От 18 до 100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="visit-date">Дата посещения:</label>
+                        <input type="date" id="visit-date" name="visit-date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email для обратной связи:</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="drink">Какой напиток вы заказывали?</label>
+                        <select id="drink" name="drink" class="form-control">
+                            <option value="">Выберите напиток</option>
+                            <option value="espresso">Эспрессо</option>
+                            <option value="cappuccino">Капучино</option>
+                            <option value="latte">Латте</option>
+                            <option value="raf">Раф</option>
+                            <option value="other">Другой</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment">Ваш отзыв:</label>
+                        <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Что вам особенно понравилось или что можно улучшить?"></textarea>
+                    </div>
+                    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-coffee mr-2">Отправить отзыв</button>
+                        <button type="reset" class="btn btn-outline-coffee">Сбросить форму</button>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p class="text-muted"><small>Нажмите "Отправить отзыв" для отправки данных или "Сбросить форму" для очистки</small></p>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Aside элемент -->
+            <aside class="aside-block p-3 bg-light rounded mt-4">
+                <h4 class="text-coffee">📞 Контакты</h4>
+                <div class="aside-content">
+                    <p><strong>Адрес:</strong> г. Владимир, ул. Кофейная, 15</p>
+                    <p><strong>Часы работы:</strong> Ежедневно с 8:00 до 22:00</p>
+                    <p><strong>Телефон:</strong> +7 (4922) 123-45-67</p>
+                </div>
+            </aside>
+        </article>
+
+        <!-- Дополнительный раздел: Галерея -->
+        <section id="gallery" class="mb-5 p-4 bg-white rounded shadow-sm">
+            <h2 class="text-coffee">🖼️ Галерея нашей кофейни</h2>
+            <p>Посмотрите фотографии нашей уютной кофейни и наших напитков.</p>
+            <div class="row mt-3">
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300x200/8b4513/ffffff?text=Интерьер+1" class="img-fluid rounded gallery-img" alt="Интерьер кофейни">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300x200/d2691e/ffffff?text=Напитки" class="img-fluid rounded gallery-img" alt="Наши напитки">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300x200/f4a460/000000?text=Десерты" class="img-fluid rounded gallery-img" alt="Домашние десерты">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="coffee-bg text-white p-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h4>Кофейня "Уютный уголок"</h4>
+                    <p class="mb-0">г. Владимир, ул. Кофейная, 15</p>
+                    <p class="mb-0">Ежедневно с 8:00 до 22:00</p>
+                    <p>Телефон: +7 (4922) 123-45-67</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Мы в соцсетях</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Instagram</a></li>
+                        <li><a href="#" class="text-white">VKontakte</a></li>
+                        <li><a href="#" class="text-white">Telegram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Полезные ссылки</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Акции и скидки</a></li>
+                        <li><a href="#" class="text-white">Карта лояльности</a></li>
+                        <li><a href="#" class="text-white">Вакансии</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3 pt-3 border-top border-light">
+                <p class="mb-1">© 2025 Кофейня "Уютный уголок". Лабораторная работа №5. jQuery</p>
+                <small>Выполнила: Сокольникова А.С., группа ИТ-123. Преподаватель: Лексин А.Ю.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключение библиотек -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Подключение собственных скриптов -->
+    <script src="js/jquery.plugin.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
